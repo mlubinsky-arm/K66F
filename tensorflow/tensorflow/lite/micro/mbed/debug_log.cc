@@ -19,7 +19,7 @@ limitations under the License.
 
 // On mbed platforms, we set up a serial port and write to it for debug logging.
 extern "C" void DebugLog(const char* s) {
-   static Serial pc(USBTX, USBRX);
-   pc.printf("%s", s);
-  // printf("%s", s);
+   //static Serial pc(USBTX, USBRX);
+   //pc.printf("%s", s);
+    printf("%s", s);
 }
