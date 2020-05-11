@@ -25,6 +25,8 @@
 
 #include "mbed-trace/mbed_trace.h"             // Required for mbed_trace_*
 
+#include "tensor_thread.h"
+
 // Pointers to the resources that will be created in main_application().
 static MbedCloudClient *cloud_client;
 static bool cloud_client_running = true;
@@ -149,6 +151,10 @@ void flush_stdin_buffer(void)
 
 int main(void)
 {
+    tensor_thread_init();
+    tensor_thread_start();
+    while(1){}
+
     int status;
 
     status = mbed_trace_init();
