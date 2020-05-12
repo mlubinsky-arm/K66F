@@ -64,7 +64,7 @@
             "storage_tdb_internal.internal_base_address": "(1024*1024)",
             "storage_tdb_internal.internal_size"        : "(96*1024)",
             "storage.storage_type"                      : "TDB_INTERNAL",
-            "platform.default-serial-baud-rate"         : 115200,
+            "platform.default-serial-baud-rate"         : 14500,
             "run-ci"                                    : 2
         },
         "NUCLEO_F429ZI": {
