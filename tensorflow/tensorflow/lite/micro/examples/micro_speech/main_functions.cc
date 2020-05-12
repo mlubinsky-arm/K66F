@@ -49,8 +49,6 @@ uint8_t* model_input_buffer = nullptr;
 
 // The name of this function is important for Arduino compatibility.
 void setup() {
-  printf("\n inside setup\n");
-  //return;
   // Set up logging. Google style is to avoid globals or statics because of
   // lifetime uncertainty, but since this has a trivial destructor it's okay.
   // NOLINTNEXTLINE(runtime-global-variables)
@@ -124,20 +122,15 @@ void setup() {
 
 // The name of this function is important for Arduino compatibility.
 void loop() {
-  printf("\n inside LOOP\n");
-  //return;
   // Fetch the spectrogram for the current time.
   const int32_t current_time = LatestAudioTimestamp();
-  //printf("\n LOOP 2 \n");
   int how_many_new_slices = 0;
   TfLiteStatus feature_status = feature_provider->PopulateFeatureData(
       error_reporter, previous_time, current_time, &how_many_new_slices);
-  //printf("\n LOOP 3 \n");
   if (feature_status != kTfLiteOk) {
     TF_LITE_REPORT_ERROR(error_reporter, "Feature generation failed");
     return;
   }
-  //printf("\n LOOP 4 \n");
   previous_time = current_time;
   // If no new audio samples have been received since last time, don't bother
   // running the network model.
@@ -145,13 +138,11 @@ void loop() {
     return;
   }
 
-  //printf("\n LOOP 5 \n");
   // Copy feature buffer to input tensor
   for (int i = 0; i < kFeatureElementCount; i++) {
     model_input_buffer[i] = feature_buffer[i];
   }
 
-  //printf("\n LOOP 6 \n");
   // Run the model on the spectrogram input and make sure it succeeds.
   TfLiteStatus invoke_status = interpreter->Invoke();
   if (invoke_status != kTfLiteOk) {
@@ -159,7 +150,6 @@ void loop() {
     return;
   }
 
-  //printf("\n LOOP 7 \n");
   // Obtain a pointer to the output tensor
   TfLiteTensor* output = interpreter->output(0);
   // Determine whether a command was recognized based on the output of inference
@@ -168,7 +158,6 @@ void loop() {
   bool is_new_command = false;
   TfLiteStatus process_status = recognizer->ProcessLatestResults(
       output, current_time, &found_command, &score, &is_new_command);
-  //printf("\n LOOP 8 \n");
   if (process_status != kTfLiteOk) {
     TF_LITE_REPORT_ERROR(error_reporter,
                          "RecognizeCommands::ProcessLatestResults() failed");
@@ -177,7 +166,7 @@ void loop() {
   // Do something based on the recognized command. The default implementation
   // just prints to the error console, but you should replace this with your
   // own function for a real application.
-  printf("\n LOOP 9- before Respond Command \n");
+  //printf("\n LOOP 9- before Respond Command \n");
   RespondToCommand(error_reporter, current_time, found_command, score,
                    is_new_command);
 }

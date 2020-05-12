@@ -14,8 +14,9 @@ limitations under the License.
 ==============================================================================*/
 
 #include "tensorflow/lite/micro/examples/micro_speech/recognize_commands.h"
-
+#include <cstdio>
 #include <limits>
+#define DEBUG 0
 
 RecognizeCommands::RecognizeCommands(tflite::ErrorReporter* error_reporter,
                                      int32_t average_window_duration_ms,
@@ -70,8 +71,11 @@ TfLiteStatus RecognizeCommands::ProcessLatestResults(
 
   // Prune any earlier results that are too old for the averaging window.
   const int64_t time_limit = current_time_ms - average_window_duration_ms_;
+  if(DEBUG) printf("\n average_window_duration_ms_=%ld", average_window_duration_ms_ );
+ 
   while ((!previous_results_.empty()) &&
          previous_results_.front().time_ < time_limit) {
+    if(DEBUG) printf("\n PREVIOUS RESULT pop");
     previous_results_.pop_front();
   }
 
@@ -82,6 +86,8 @@ TfLiteStatus RecognizeCommands::ProcessLatestResults(
   const int64_t samples_duration = current_time_ms - earliest_time;
   if ((how_many_results < minimum_count_) ||
       (samples_duration < (average_window_duration_ms_ / 4))) {
+    if (DEBUG) printf ("\n XXX ProcessLatestResults how_many_results=%lld, minimum_count_=%ld", how_many_results , minimum_count_);
+    if (DEBUG) printf ("\n XXX samples_duration=%lld average_window_duration_ms_/4=%ld", samples_duration, average_window_duration_ms_ / 4);
     *found_command = previous_top_label_;
     *score = 0;
     *is_new_command = false;
@@ -115,6 +121,9 @@ TfLiteStatus RecognizeCommands::ProcessLatestResults(
       current_top_index = i;
     }
   }
+  if (DEBUG) printf("\n ProcessLatestResults current_top_index=%d", current_top_index);
+  if (DEBUG) printf("\n ProcessLatestResults current_top_score=%ld ", current_top_score);
+
   const char* current_top_label = kCategoryLabels[current_top_index];
 
   // If we've recently had another label trigger, assume one that occurs too
@@ -133,6 +142,12 @@ TfLiteStatus RecognizeCommands::ProcessLatestResults(
     previous_top_label_time_ = current_time_ms;
     *is_new_command = true;
   } else {
+   if (DEBUG){
+       printf("\n XXX YYY is_new_command = false");
+       printf("\n XXX YYY current_top_score=%ld detection_threshold_=%d ", current_top_score, detection_threshold_);
+       printf("\n XXX YYY current_top_label=%s previous_top_label_=%s ", current_top_label, previous_top_label_);
+       printf("\n XXX YYY time_since_last_top=%lld suppression_ms_=%ld", time_since_last_top, suppression_ms_);
+    }
     *is_new_command = false;
   }
   *found_command = current_top_label;

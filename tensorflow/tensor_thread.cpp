@@ -24,18 +24,12 @@ void tensor_thread_start(void)
 
 static void tensor_thread_main(void)
 {
-    printf("tensor_thread_main\r\n");
-
     tensor_semaphore.acquire();
-
-    printf("tensor_thread_start\r\n");
-
     setup();
 
-    printf("tensor_thread_ after setup() \r\n");
     for (;;) {
         loop();
-        ThisThread::sleep_for(1000);
+        ThisThread::sleep_for(100);  //sensitive for speech capture window frame interval
         ThisThread::yield();
     }
 }

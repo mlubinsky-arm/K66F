@@ -27,6 +27,9 @@
 
 #include "tensor_thread.h"
 
+static Serial pc(USBTX, USBRX);
+
+
 // Pointers to the resources that will be created in main_application().
 static MbedCloudClient *cloud_client;
 static bool cloud_client_running = true;
@@ -59,7 +62,7 @@ void value_increment(void)
 {
     value_increment_mutex.lock();
     m2m_get_res->set_value(m2m_get_res->get_value_int() + 1);
-    printf("Counter %" PRIu64 "\n", m2m_get_res->get_value_int());
+    //printf("Counter %" PRIu64 "\n", m2m_get_res->get_value_int());
     value_increment_mutex.unlock();
 }
 
@@ -151,10 +154,6 @@ void flush_stdin_buffer(void)
 
 int main(void)
 {
-    tensor_thread_init();
-    tensor_thread_start();
-    while(1){}
-
     int status;
 
     status = mbed_trace_init();
@@ -274,6 +273,11 @@ int main(void)
 
     t.start(callback(&queue, &EventQueue::dispatch_forever));
     queue.call_every(5000, value_increment);
+
+
+    tensor_thread_init();
+    tensor_thread_start();
+    //while(1){};
 
     // Flush the stdin buffer before reading from it
     flush_stdin_buffer();
