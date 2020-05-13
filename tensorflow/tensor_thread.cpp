@@ -29,7 +29,7 @@ static void tensor_thread_main(void)
 
     for (;;) {
         loop();
-        ThisThread::sleep_for(100);  //sensitive for speech capture window frame interval
+        ThisThread::sleep_for(10);  //sensitive for speech capture window frame interval
         ThisThread::yield();
     }
 }
