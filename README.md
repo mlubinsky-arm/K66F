@@ -55,12 +55,32 @@ Client registered.
 Account ID: 016ae19784b892467cec285400000000
 Endpoint name: 017229a5a17800000000000100115c48
 Device ID: 017229a5a17800000000000100115c48
-Compiled with baud rate 9600
-
-iBut the actual Serial port baud rate 14500
-
 ```
-mbed compile --target K66F --toolchain GCC_ARM --profile release --flash --sterm --baudrate  14500
+
+### 2) PDM application + TensorFlow
+
+Enable TensorFlow library using macro `ENABLE_TENSORFLOW`. This will include the library
+
+```sh
+mbed compile -f -DENABLE_TENSORFLOW #flashes the firmware to device 
+```
+
+Uart logs (Baud rate 14400) Snippet from successfully Device bootstrapped and Device registered
+
+```sh
+.flow library.... 
+12 bytes lost due to alignment. To avoid this loss, please make sure the tensor_arena is 16 bytes aligned.
+Client registered.
+Account ID: 016ae19784b892467cec285400000000
+Endpoint name: 017229a5a17800000000000100115c48
+Device ID: 017229a5a17800000000000100115c48
+
+Heard silence (208) @608ms
+Heard no (221) @3136ms
+Heard unknown (201) @7104ms
+Heard no (204) @8512ms
+Heard no (211) @16128ms
+
 ```
 
 It recognize  the following:
