@@ -30,7 +30,7 @@ mbed import https://github.com/mlubinsky-arm/K66F
 cd K66F
 ```
 
-### 1) PDM application
+### 1) PDM application (Must for first time)
 
 ```sh
 mbed target K6GF
