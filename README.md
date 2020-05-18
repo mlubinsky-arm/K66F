@@ -7,8 +7,20 @@ Repository of the projects
 - [Micro Speech Example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#deploy-to-nxp-frdm-k66f)
 - [Pelion Device Management](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#deploy-to-nxp-frdm-k66f)
 
+## Requirements
 
-and
+- Mbed CLI >= 1.10.0
+
+  For instructions on installing and using Mbed CLI, please see our [documentation](https://os.mbed.com/docs/mbed-os/latest/tools/developing-mbed-cli.html).
+
+- Install the `CLOUD_SDK_API_KEY`
+
+   `mbed config -G CLOUD_SDK_API_KEY ak_1MDE1...<snip>`
+
+   You should generate your own API key. Pelion Device Management is available for any Mbed developer. Create a [free trial](https://os.mbed.com/pelion-free-tier).
+
+   For instructions on how to generate your API key, please see our [documentation](https://cloud.mbed.com/docs/current/integrate-web-app/api-keys.html#generating-an-api-key).
+
 
 <https://github.com/ARMmbed/mbed-os-example-pelion>
  
