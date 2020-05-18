@@ -21,9 +21,40 @@ Repository of the projects
 
    For instructions on how to generate your API key, please see our [documentation](https://cloud.mbed.com/docs/current/integrate-web-app/api-keys.html#generating-an-api-key).
 
+## Compiling
 
-<https://github.com/ARMmbed/mbed-os-example-pelion>
- 
+Get the code using mbed import
+
+```sh
+mbed import https://github.com/mlubinsky-arm/K66F
+cd K66F
+```
+
+### 1) PDM application
+
+```sh
+mbed target K6GF
+mbed toolchain GCC_ARM
+mbed device-management init -d arm.com --model-name example-app --force -q
+mbed compile -f # flashes the firmware to device 
+```
+
+Uart logs (Baud rate 9600) Snippet from successfully Device bootstrapped and Device registered
+
+```sh
+Application ready
+Connect to network
+Network initialized, connected with IP 192.168.2.2
+
+Start developer flow
+Create resources
+Register Pelion Device Management Client
+
+Tensor flow disabled 
+Client registered.
+Account ID: 016ae19784b892467cec285400000000
+Endpoint name: 017229a5a17800000000000100115c48
+Device ID: 017229a5a17800000000000100115c48
 Compiled with baud rate 9600
 
 iBut the actual Serial port baud rate 14500
