@@ -1,8 +1,12 @@
-## K66F
+# Pelion ML demo - (PDM + TensorFlow)
 
-Combination of 
+This repository shows the integration  of **Pelion Device Management** and **Micro Speech Example**. Used as base application for pelion-ml features demo
 
-<https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#deploy-to-nxp-frdm-k66f>
+Repository of the projects
+
+- [Micro Speech Example](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#deploy-to-nxp-frdm-k66f)
+- [Pelion Device Management](https://github.com/tensorflow/tensorflow/tree/master/tensorflow/lite/micro/examples/micro_speech#deploy-to-nxp-frdm-k66f)
+
 
 and
 
