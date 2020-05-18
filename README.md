@@ -83,12 +83,19 @@ Heard no (211) @16128ms
 
 ```
 
+Note : Compiled with baud rate 9600 , But the actual Serial port baud rate 14400
+
+## Keyword detection
+
 It recognize  the following:
-```
+
+```sh
 - yes
 - no
 - silence
 - unknown
 ```
-### Link
+
+## Link
+
 <https://developer.arm.com/solutions/machine-learning-on-arm/developer-material/how-to-guides/build-arm-cortex-m-voice-assistant-with-google-tensorflow-lite/single-page>
