@@ -25,7 +25,9 @@
 
 #include "mbed-trace/mbed_trace.h"             // Required for mbed_trace_*
 
+#ifdef ENABLE_TENSORFLOW
 #include "tensor_thread.h"
+#endif
 
 static Serial pc(USBTX, USBRX);
 
@@ -274,9 +276,13 @@ int main(void)
     t.start(callback(&queue, &EventQueue::dispatch_forever));
     queue.call_every(5000, value_increment);
 
-
+#ifdef ENABLE_TENSORFLOW
+    printf("Enabling Tensor flow library\n");
     tensor_thread_init();
     tensor_thread_start();
+#else
+    printf("Tensor flow disabled \n");
+#endif
     //while(1){};
 
     // Flush the stdin buffer before reading from it
