@@ -10,7 +10,7 @@
     "target_overrides": {
         "*": {
             "target.features_add"                       : ["BOOTLOADER", "STORAGE"],
-            "platform.stdio-baud-rate"                  : 9600,
+            "platform.stdio-baud-rate"                  : 115200,
             "platform.stdio-convert-newlines"           : true,
             "platform.stdio-buffered-serial"            : true,
             "platform.stdio-flush-at-exit"              : true,
