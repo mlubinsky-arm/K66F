@@ -267,7 +267,7 @@ TfLiteStatus InitAudioRecording(tflite::ErrorReporter *error_reporter) {
 
   // Set Clock to 180 MHz
   // BOARD_BootClockRUN();
-  BOARD_BootClockHSRUN();
+  // BOARD_BootClockHSRUN();
 
   // Enable Code Caching to improve performance
   LMEM_EnableCodeCache(LMEM, true);
